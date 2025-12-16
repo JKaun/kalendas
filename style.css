@@ -1,0 +1,395 @@
+:root {
+    --color-1: #95BADC;
+    --color-2: #CCDFEE;
+    --color-3: #3A405B;
+    --color-4: #566288;
+    --color-5: #7589A2;
+    --color-6: #909BBB;
+    --color-7: #F4F6FF;
+    --color-8: #000000;
+    --color-9: #FFFFFF;
+    --color-10: #000000;
+}
+
+
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 20px;
+    background-color: var(--color-4);
+    color: var(--color-8);
+}
+
+.contenedor-principal {
+    display: flex;
+    gap: 20px;
+    justify-content: space-between;
+}
+        
+.container {
+    width: 60%;
+    max-width: 600px;
+    padding: 20px;
+    background-color: var(--color-7);
+    box-shadow: 0 0 10px var(--color-3);
+}
+        
+h1 {
+    text-align: center;
+    margin-bottom: 20px;
+    color: var(--color-8);
+}
+        
+.dias-semana {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 10px;
+    font-weight: bold;
+}
+        
+.dias-semana div {
+    flex: 1;
+    text-align: center;
+    padding: 5px;
+    background-color: var(--color-1);
+    color: var(--color-8);
+}
+  
+.calendario {
+    display: grid;
+    grid-template-columns: repeat(7, 1fr);
+    gap: 5px;
+}
+        
+.dia {
+    border: 1px solid var(--color-2);
+    padding: 10px;
+    text-align: center;
+    min-height: 60px;
+    position: relative;
+    cursor: pointer;
+    transition: background-color 0.2s ease;
+    background-color: var(--color-7);
+    color: var(--color-8);
+}
+
+.dia:hover {
+    transition: 0.5s;
+    background-color: var(--color-6);
+}
+  
+/* Indicador de día seleccionado */
+.dia.seleccionado {
+    background-color: var(--color-5);
+    color: var(--color-9);
+    transition: 0.3s;
+}
+  
+/* Indicador de días con notas */
+.dia.con-notas {
+    position: relative;
+    background-color: var(--color-1);
+}
+
+.dia.con-notas::after {
+    content: "•";
+    position: absolute;
+    top: 5px;
+    right: 5px;
+    color: var(--color-3);
+    font-size: 20px;
+    font-weight: bold;
+}
+
+/* Contador de notas en el día */
+.contador-notas {
+    position: absolute;
+    bottom: 5px;
+    right: 5px;
+    background-color: var(--color-3);
+    color: var(--color-9);
+    border-radius: 50%;
+    width: 20px;
+    height: 20px;
+    font-size: 12px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+        
+.dia span {
+    font-weight: bold;
+}
+
+/* Panel de notas a la derecha */
+.panel-notas {
+    width: 35%;
+    padding: 20px;
+    background-color: var(--color-7);
+    box-shadow: 0 0 10px var(--color-3);
+    border-radius: 5px;
+}
+
+.panel-notas h3 {
+    margin-top: 0;
+    color: var(--color-8);
+    border-bottom: 1px solid var(--color-2);
+    padding-bottom: 10px;
+}
+
+.lista-notas {
+    max-height: 500px;
+    overflow-y: auto;
+}
+
+.nota-item {
+    background-color: var(--color-1);
+    border-radius: 5px;
+    padding: 10px;
+    margin-bottom: 10px;
+    position: relative;
+    word-break: break-word;
+    color: var(--color-8);
+}
+
+.nota-texto {
+    margin-right: 30px;
+}
+
+.btn-eliminar {
+    position: absolute;
+    top: 5px;
+    right: 5px;
+    background-color: var(--color-3);
+    color: var(--color-9);
+    border: none;
+    border-radius: 3px;
+    width: 20px;
+    height: 20px;
+    cursor: pointer;
+    font-size: 12px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.btn-eliminar:hover {
+    background-color: var(--color-4);
+}
+      
+.notas {
+    margin-top: 10px;
+    padding: 5px;
+    border-top: 1px solid var(--color-2);
+    display: flex;
+    align-items: end;
+    gap: 15px;
+    flex-wrap: wrap;
+}
+        
+.notas h2 {
+    margin-bottom: 0;
+    color: var(--color-8);
+}
+
+input {
+    width: 200px;
+    height: 30px;
+    padding: 5px 10px;
+    background-color: var(--color-7);
+    border: 1px solid var(--color-5);
+    border-radius: 4px;
+    color: var(--color-10);
+}
+
+.button {
+    padding: 8px 15px;
+    height: 40px;
+    background-color: var(--color-1);
+    border: 1px solid var(--color-5);
+    font-style: oblique;
+    cursor: pointer;
+    border-radius: 4px;
+    transition: all 0.3s;
+    color: var(--color-9);
+}
+  
+.btn-limpiar-todo {
+    background-color: var(--color-3);
+    color: var(--color-7);
+    border: 1px solid var(--color-4);
+}
+  
+.btn-limpiar-todo:hover {
+    background-color: var(--color-4);
+}
+  
+.button span {
+    display: inline-block;
+    position: relative;
+    transition: 0.5s;
+    background-color: transparent;
+    border-color: transparent;
+}
+
+.button:hover {
+    background-color: var(--color-6);
+    color: var(--color-8);
+}
+
+/* Estilo para el texto de placeholder */
+input::placeholder {
+    color: var(--color-9);
+}
+
+/* Estilo para cuando no hay notas */
+.lista-notas p {
+    color: var(--color-9);
+    font-style: italic;
+}
+
+
+.btn-alert {
+    opacity: 0;
+}
+
+.text-span {
+    padding: 20px;
+}
+
+.shown-alert {  
+    opacity: 1;
+    color: var(--color-9);
+    position: absolute;
+    background-color: var(--color-3);
+    border-radius: 5%;
+    width: 300px;
+    height: 100px;
+    top: 200px;
+    right: 600px;
+}
+
+.shown-alert button {
+    opacity: 1;
+    align-items: end;
+}
+
+
+.hidden-alert {
+    opacity: 0;
+}
+
+.selector-paletas {
+    position: absolute;
+    top: 20px;
+    right: 20px;
+    background-color: var(--color-7);
+    padding: 10px;
+    border-radius: 5px;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+}
+
+.selector-paletas label {
+    margin-right: 10px;
+    color: var(--color-8);
+    font-weight: bold;
+}
+
+.selector-paletas select {
+    background-color: var(--color-7);
+    color: var(--color-8);
+    border: 1px solid var(--color-5);
+    padding: 5px;
+    border-radius: 3px;
+}
+
+/* Sistema de diálogos personalizados */
+.dialog-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5);
+    display: none;
+    justify-content: center;
+    align-items: center;
+    z-index: 1000;
+}
+
+.dialog-overlay.mostrar {
+    display: flex;
+}
+
+.dialog-contenedor {
+    background-color: var(--color-7);
+    border: 2px solid var(--color-5);
+    border-radius: 10px;
+    padding: 25px;
+    max-width: 400px;
+    width: 90%;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+    text-align: center;
+}
+
+.dialog-titulo {
+    color: var(--color-8);
+    margin-bottom: 15px;
+    font-size: 1.3em;
+    font-weight: bold;
+}
+
+.dialog-mensaje {
+    color: var(--color-8);
+    margin-bottom: 20px;
+    line-height: 1.5;
+    font-size: 1em;
+}
+
+.dialog-botones {
+    display: flex;
+    justify-content: center;
+    gap: 15px;
+}
+
+.dialog-btn {
+    padding: 10px 25px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-weight: bold;
+    transition: all 0.3s ease;
+    min-width: 100px;
+}
+
+.dialog-btn.aceptar {
+    background-color: var(--color-1);
+    color: var(--color-8);
+}
+
+.dialog-btn.cancelar {
+    background-color: var(--color-6);
+    color: var(--color-8);
+}
+
+.dialog-btn.cerrar {
+    background-color: var(--color-3);
+    color: var(--color-9);
+}
+
+.dialog-btn:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 3px 8px rgba(0, 0, 0, 0.2);
+}
+
+.dialog-btn.aceptar:hover {
+    background-color: var(--color-5);
+}
+
+.dialog-btn.cancelar:hover {
+    background-color: var(--color-5);
+}
+
+.dialog-btn.cerrar:hover {
+    background-color: var(--color-4);
+}

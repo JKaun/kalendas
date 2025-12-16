@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Calendario Octubre</title>
+    <link rel="stylesheet" href="style.css">
+    <script src="index.js"></script>
+</head>
+<body>
+    <div class="contenedor-principal">
+        <div class="container">
+            <h1 id="mes">OCTUBRE</h1>
+            
+            <div class="dias-semana">
+                <div>LUNES</div>
+                <div>MARTES</div>
+                <div>MIÉRCOLES</div>
+                <div>JUEVES</div>
+                <div>VIERNES</div>
+                <div>SÁBADO</div>
+                <div>DOMINGO</div>
+            </div>
+            
+            <div class="calendario">
+                <!-- Primera fila -->
+                <div class="dia"></div>
+                <div class="dia"></div>
+                <div class="dia"><span>1</span></div>
+                <div class="dia"><span>2</span></div>
+                <div class="dia"><span>3</span></div>
+                <div class="dia"><span>4</span></div>
+                <div class="dia"><span>5</span></div>
+                <div class="dia"><span>6</span></div>
+                <div class="dia"><span>7</span></div>
+                
+                <!-- Segunda fila -->
+                <div class="dia"><span>8</span></div>
+                <div class="dia"><span>9</span></div>
+                <div class="dia"><span>10</span></div>
+                <div class="dia"><span>11</span></div>
+                <div class="dia"><span>12</span></div>
+                <div class="dia"><span>13</span></div>
+                <div class="dia"><span>14</span></div>
+                
+                <!-- Tercera fila -->
+                <div class="dia"><span>15</span></div>
+                <div class="dia"><span>16</span></div>
+                <div class="dia"><span>17</span></div>
+                <div class="dia"><span>18</span></div>
+                <div class="dia"><span>19</span></div>
+                <div class="dia"><span>20</span></div>
+                <div class="dia"><span>21</span></div>
+                
+                <!-- Cuarta fila -->
+                <div class="dia"><span>22</span></div>
+                <div class="dia"><span>23</span></div>
+                <div class="dia"><span>24</span></div>
+                <div class="dia"><span>25</span></div>
+                <div class="dia"><span>26</span></div>
+                <div class="dia"><span>27</span></div>
+                <div class="dia"><span>28</span></div>
+                
+                <!-- Quinta fila -->
+                <div class="dia"><span>29</span></div>
+                <div class="dia"><span>30</span></div>
+                <div class="dia"><span>31</span></div>
+                <div class="dia"></div>
+                <div class="dia"></div>
+            </div>
+            
+            <div class="notas">
+                <h2>NOTAS</h2>
+                <input type="text" placeholder="¿Qué piensas?" id="note-text">
+                <button type="button" onclick="guardarNota()" class="button"><span>Guardar Nota</span></button>
+                <button type="button" onclick="limpiarTodasLasNotas()" class="button btn-limpiar-todo"><span>Borrar Todo</span></button>
+            </div>
+
+            <div class="selector-paletas">
+                <label>Paleta de colores:</label>
+                <select id="selector-paleta" onchange="cambiarPaleta(this.value)">
+                    <option value="original">Original</option>
+                    <option value="oscura">Oscura</option>
+                    <option value="pastel">Pastel</option>
+                    <option value="calida">Cálida</option>
+                </select>
+            </div>
+        </div>
+
+        <!-- Panel de notas a la derecha -->
+        <div class="panel-notas">
+            <h3>Notas del Día <span id="dia-actual">-</span></h3>
+            <div class="lista-notas" id="lista-notas">
+                <!-- Las notas se mostrarán aquí -->
+            </div>
+        </div>
+    </div>
+    <!-- Sistema de diálogos -->
+    <div id="dialogOverlay" class="dialog-overlay">
+        <div class="dialog-contenedor">
+            <div id="dialogTitulo" class="dialog-titulo">Atención</div>
+            <div id="dialogMensaje" class="dialog-mensaje"></div>
+            <div class="dialog-botones" id="dialogBotones">
+                <!-- Los botones se insertan dinámicamente -->
+            </div>
+    </div>
+</div>
+</body>
+</html>

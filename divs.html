@@ -1,0 +1,214 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Calendario Octubre - Notas</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 20px;
+            background-color: #f5f5f5;
+            display: flex;
+            justify-content: flex-start;
+        }
+        
+        .container {
+            width: 70%;
+            max-width: 600px;
+            margin-left: 20px;
+            background-color: white;
+            padding: 20px;
+            box-shadow: 0 0 10px rgba(0,0,0,0.1);
+        }
+        
+        h1 {
+            text-align: center;
+            margin-bottom: 20px;
+            color: #333;
+        }
+        
+        .dias-semana {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 10px;
+            font-weight: bold;
+        }
+        
+        .dias-semana div {
+            flex: 1;
+            text-align: center;
+            padding: 5px;
+        }
+        
+        .calendario {
+            display: grid;
+            grid-template-columns: repeat(7, 1fr);
+            gap: 5px;
+        }
+        
+        .dia {
+            border: 1px solid #ddd;
+            padding: 10px;
+            text-align: center;
+            min-height: 60px;
+            position: relative;
+            cursor: pointer;
+        }
+        
+        .dia:hover {
+            background-color: #e0e0e0;
+        }
+        
+        .dia span {
+            font-weight: bold;
+        }
+        
+        .dia.con-nota {
+            background-color: #e0f7fa; /* Color de fondo para días con nota */
+        }
+        
+        .nota-del-dia {
+            font-size: 0.8rem;
+            color: #00796b;
+            margin-top: 5px;
+            word-break: break-word;
+        }
+        
+        .notas {
+            margin-top: 30px;
+            padding: 10px;
+            border-top: 1px solid #ccc;
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+        
+        .notas h2 {
+            margin-bottom: 0;
+            color: #333;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>OCTUBRE</h1>
+        
+        <div class="dias-semana">
+            <div>LUNES</div>
+            <div>MARTES</div>
+            <div>MIÉRCOLES</div>
+            <div>JUEVES</div>
+            <div>VIERNES</div>
+            <div>SÁBADO</div>
+            <div>DOMINGO</div>
+        </div>
+        
+        <div class="calendario" id="calendario">
+            <!-- Los días se generan mediante JavaScript -->
+        </div>
+        
+        <div class="notas">
+            <h2>NOTAS</h2>
+            <p>larcas</p>
+        </div>
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const calendario = document.getElementById('calendario');
+            const diasDelMes = [
+                // Primera fila (empezando desde el día 2 porque el 1 no está en la imagen)
+                { numero: 2, simbolo: '+' }, { numero: 3, simbolo: 'A' }, { numero: 4, simbolo: '+' }, 
+                { numero: 5, simbolo: 'A' }, { numero: 6, simbolo: '+' }, { numero: 7, simbolo: '+' }, 
+                { numero: 8, simbolo: '+' },
+                // Segunda fila
+                { numero: 9, simbolo: 'A' }, { numero: 10, simbolo: '+' }, { numero: 11, simbolo: 'A' }, 
+                { numero: 12, simbolo: '+' }, { numero: 13, simbolo: 'A' }, { numero: 14, simbolo: '+' }, 
+                { numero: 15, simbolo: '+' },
+                // Tercera fila
+                { numero: 16, simbolo: 'A' }, { numero: 17, simbolo: '+' }, { numero: 18, simbolo: '+' }, 
+                { numero: 19, simbolo: '+' }, { numero: 20, simbolo: 'A' }, { numero: 21, simbolo: '+' }, 
+                { numero: 22, simbolo: '+' },
+                // Cuarta fila
+                { numero: 23, simbolo: '+' }, { numero: 24, simbolo: 'A' }, { numero: 25, simbolo: '+' }, 
+                { numero: 26, simbolo: 'A' }, { numero: 27, simbolo: '+' }, { numero: 28, simbolo: '+' }, 
+                { numero: 29, simbolo: '+' },
+                // Quinta fila
+                { numero: 30, simbolo: '+' }, { numero: 31, simbolo: 'A' }
+            ];
+
+            // Cargar notas desde localStorage
+            let notasPorDia = JSON.parse(localStorage.getItem('notasOctubre')) || {};
+
+            // Función para guardar notas
+            function guardarNota(dia, nota) {
+                notasPorDia[dia] = nota;
+                localStorage.setItem('notasOctubre', JSON.stringify(notasPorDia));
+            }
+
+            // Crear los días del mes
+            diasDelMes.forEach(diaInfo => {
+                const diaElement = document.createElement('div');
+                diaElement.className = 'dia';
+                diaElement.innerHTML = `
+                    <span>${diaInfo.numero}</span>
+                    <div class="simbolo">${diaInfo.simbolo}</div>
+                `;
+
+                // Comprobar si hay nota para este día
+                if (notasPorDia[diaInfo.numero]) {
+                    diaElement.classList.add('con-nota');
+                    const notaElement = document.createElement('div');
+                    notaElement.className = 'nota-del-dia';
+                    notaElement.textContent = notasPorDia[diaInfo.numero];
+                    diaElement.appendChild(notaElement);
+                }
+
+                // Evento al hacer clic
+                diaElement.addEventListener('click', function() {
+                    const nota = prompt('Ingresa tu nota para el día ' + diaInfo.numero + ':', notasPorDia[diaInfo.numero] || '');
+                    if (nota !== null) { // Si el usuario no cancela
+                        if (nota.trim() === '') {
+                            // Si la nota está vacía, eliminamos la nota
+                            delete notasPorDia[diaInfo.numero];
+                            // Removemos la clase y cualquier nota existente
+                            diaElement.classList.remove('con-nota');
+                            const notaExistente = diaElement.querySelector('.nota-del-dia');
+                            if (notaExistente) {
+                                notaExistente.remove();
+                            }
+                        } else {
+                            // Guardamos la nota
+                            guardarNota(diaInfo.numero, nota);
+                            // Añadimos la clase si no está
+                            diaElement.classList.add('con-nota');
+                            // Buscamos si ya existe un elemento de nota
+                            let notaElement = diaElement.querySelector('.nota-del-dia');
+                            if (!notaElement) {
+                                notaElement = document.createElement('div');
+                                notaElement.className = 'nota-del-dia';
+                                diaElement.appendChild(notaElement);
+                            }
+                            notaElement.textContent = nota;
+                        }
+                        // Guardar en localStorage
+                        localStorage.setItem('notasOctubre', JSON.stringify(notasPorDia));
+                    }
+                });
+
+                calendario.appendChild(diaElement);
+            });
+
+            // Añadir días vacíos al final para completar la cuadrícula (5 filas de 7 días = 35 celdas)
+            // Ya tenemos 31 días, así que añadimos 4 vacíos
+            for (let i = 0; i < 4; i++) {
+                const diaVacio = document.createElement('div');
+                diaVacio.className = 'dia';
+                calendario.appendChild(diaVacio);
+            }
+        });
+    </script>
+</body>
+</html>
